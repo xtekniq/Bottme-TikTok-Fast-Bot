@@ -1,0 +1,15 @@
+┌┬─────┬──────────┐    ┌──────┬──┐
+││Tools│┼┼┼┼┼┼┼┼┼┼│    │Status│┼┼│
+├┴─────┴──────────┤    ├──────┴──┤
+│ views           │    │ online  │
+│ likes           │    │ offline │
+│ favourites      │    │ offline │
+│ shares          │    │ on (lim)│
+│ followers       │    │ soon    │
+│ gui             │    │ beta    │
+│                 │    │         │
+│                 │    │         │
+│                 │    │         │
+│                 │    │         │
+│                 │    │         │
+└─────────────────┘    └─────────┘

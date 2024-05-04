@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Bottme Requests Gui (BRG) build 089-157 - bottmerequests.exe</title>
+	</head>
+	<body onkeydown="DBM.deleteSelection(event)">
+		<link rel="stylesheet" type="text/css" href="semantic.css">
+		<input style="display:none;" id="fileSave" type="file" nwsaveas="DiscordBot.zip" onchange="DBM.onExportSaved(this)" />
+		<input style="display:none;" id="fileDialog" type="file" accept=".discordbot" onchange="DBM.onProjectChange(this)" />
+		<div style="text-align: center; padding-top: 10px;" id="id_tabs_main">
+			<div class="ui blue buttons" style="width: 95%;" id="id_tabs">
+				<button id="a_tab_com" class="ui button active" style="width: 25%;" onclick="DBM.shiftTabs(event, 'Commands', 0)">Views</button>
+				<button id="a_tab_eve" class="ui button" style="width: 25%;" onclick="DBM.shiftTabs(event, 'Events', 1)">Followers</button>
+				<button id="a_tab_sets" class="ui button" style="width: 25%;" onclick="DBM.shiftTabs(event, 'Settings', 2)">Settings</button>
+			</div>
+		</div>
+		<div id="id_pages" style="padding: 12px 20px;">
+			<div id="Commands" style="display: block;" class="page">
+				<div class="action-holder">
+					<button class="tiny ui labeled icon button" style="width: 200px;" onclick="DBM.onCreateCommand()"><i class="plus icon"></i><span id="createnewbutton">New Instance</span></button>
+					<br><br>
+					<div class="myactions" id="myactions" style="width: 200px; height: 381px;">
+					</div>
+				</div>
+				<div id="command-content" style="margin-left: 250px; display: none;">
+					<br>
+					<div>
+						<div style="float: left; width: 55%;">
+							<span id="comLabel">Command Name:</span><br>
+							<input id="name" style="width: 100%; height: 38px;" onkeydown="DBM.preventSpace(event)" onkeyup="DBM.tempSaveData('name')" type="text">
+						</div>
+						<div style="float: right; width: 40%;">
+							<span id="commandtype">Command Type:</span><br>
+							<div style="width: 100%;">
+								<select class="ui fluid dropdown" id="comType" onchange="DBM.tempSaveData('comType')">
+									<option value="0" id="normalcommand">Normal Command</option>
+									<option value="1" id="includesword">Includes Word</option>
+									<option value="2" id="matchesregularexpression">Matches Regular Expression</option>
+									<option value="3" id="anymessage">Any Message</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<br><br><br><br>
+					<span id="comRestriction">Command Restriction:</span><br>
+					<div style="width: 100%;">
+						<select class="ui fluid dropdown" id="restriction" onchange="DBM.tempSaveData('restriction')">
+							<option value="0" id="commandrestrict_none">None</option>
+							<option value="1" id="commandrestrict_server">Server Only</option>
+							<option value="2" id="commandrestrict_owner">Owner Only</option>
+							<option value="3" id="commandrestrict_dms">DMs Only</option>
+						</select>
+					</div>
+					<br>
+					<span id="userrequiredpermission">User Required Permission:</span><br>
+					<select class="ui fluid dropdown" id="permissions" style="width: 100%;" onchange="DBM.tempSaveData('permissions')">
+						<option value="NONE" id="userreq_none">None</option>
+						<option value="ADMINISTRATOR" id="userreq_admin">Administrator</option>
+						<option value="CREATE_INSTANT_INVITE" id="userreq_createinstant">Create Instant Invite</option>
+						<option value="KICK_MEMBERS" id="userreq_kickmem">Kick Members</option>
+						<option value="BAN_MEMBERS" id="userreq_banmembers">Ban Members</option>
+						<option value="MANAGE_CHANNELS" id="userreq_managechannel">Manage Channels</option>
+						<option value="MANAGE_GUILD" id="userreq_manageguild">Manage Guild</option>
+						<option value="ADD_REACTIONS" id="userreq_addreact">Add Reactions</option>
+						<option value="VIEW_AUDIT_LOG" id="userreq_viewaudit">View Audit Log</option>
+						<option value="VIEW_CHANNEL" id="userreq_readmsg">Read Messages</option>
+						<option value="SEND_MESSAGES" id="userreq_sendmsg">Send Messages</option>
+						<option value="SEND_TTS_MESSAGES" id="userreq_sendtts">Send TTS Messages</option>
+						<option value="MANAGE_MESSAGES" id="userreq_managemsg">Manage Messages</option>
+						<option value="EMBED_LINKS" id="userreq_embedlink">Embed Links</option>
+						<option value="ATTACH_FILES" id="userreq_attachfiles">Attach Files</option>
+						<option value="READ_MESSAGE_HISTORY" id="userreq_readmsghistory">Read Message History</option>
+						<option value="MENTION_EVERYONE" id="userreq_mentionevery">Mention Everyone</option>
+						<option value="USE_EXTERNAL_EMOJIS" id="userreq_useexternalemojis">Use External Emojis</option>
+						<option value="CONNECT" id="userreq_connect">Connect to Voice</option>
+						<option value="SPEAK" id="userreq_speak">Speak in Voice</option>
+						<option value="MUTE_MEMBERS" id="userreq_mutemembers">Mute Members</option>
+						<option value="DEAFEN_MEMBERS" id="userreq_defeanmembers">Deafen Members</option>
+						<option value="MOVE_MEMBERS" id="userreq_movemembers">Move Members</option>
+						<option value="USE_VAD" id="userreq_usevad">Use Vad</option>
+						<option value="CHANGE_NICKNAME" id="userreq_changenickname">Change Nickname</option>
+						<option value="MANAGE_NICKNAMES" id="userreq_managenicknames">Manage Nicknames</option>
+						<option value="MANAGE_ROLES" id="userreq_manageroles">Manage Roles</option>
+						<option value="MANAGE_WEBHOOKS" id="userreq_webhooks">Manage Webhooks</option>
+						<option value="MANAGE_EMOJIS" id="userreq_emojis">Manage Emojis</option>
+					</select><br>
+					<br>
+					<div class="footer">
+						<div class="infooter">
+							<div style="float: right; padding-bottom: 5px;">
+								<button class="tiny compact ui labeled icon button" onclick="DBM.addAction()"><i class="plus icon"></i><span id="com_create">Create</span></button>
+								<button class="tiny compact ui labeled icon button" onclick="DBM.editAction()"><i class="legal icon"></i><span id="com_edit">Edit</span></button>
+								<button class="tiny compact ui labeled icon button" onclick="DBM.deleteAction()"><i class="remove icon"></i><span id="com_delete">Delete</span></button>
+							</div>
+							<span id="com_actions">Actions:</span>
+							<div class="myactions" id="actions" style="width: 100%;">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="Events" class="page">
+				<div class="event-action-holder">
+					<button class="tiny ui labeled icon button" style="width: 200px;" onclick="DBM.eonCreateCommand()"><i class="plus icon"></i><span id="createnewevent">Create New Event</span></button>
+					<br><br>
+					<div class="emyactions" id="emyactions" style="width: 200px; height: 381px;">
+					</div>
+				</div>
+				<p>a</p>
+				<div id="event-command-content" style="margin-left: 250px; display: none;">
+					<br>
+					<span id="eventname">Event Name:</span><br>
+					<input id="ename" style="width: 100%; height: 38px;" onkeyup="DBM.etempSaveData('ename')" type="text">
+					<br>
+					<span id="eventtrigger">Event Trigger:</span><br>
+					<select class="ui fluid dropdown" id="event-type" style="width: 100%;" onchange="DBM.etempSaveData('event-type')">
+						<option value="0" id="eventrig_none">None</option>
+						<option value="1" id="eventrig_botinit">Bot Initialization</option>
+						<option value="2" id="eventrig_anymsgsent">Any Message Sent (Deprecated: Use "Any Message" command type)</option>
+						<option value="3" id="eventrig_oninterval">On Interval</option>
+						<option value="4" id="eventrig_botjoin">Bot Join Server</option>
+						<option value="5" id="eventrig_botleave">Bot Leave Server</option>
+						<option value="6" id="eventrig_memjoinserv">Member Join Server</option>
+						<option value="7" id="eventrig_memleaveserv">Member Leave Server</option>
+						<option value="8" id="eventrig_channelcreate">Channel Create</option>
+						<option value="9" id="eventrig_channeldelete">Channel Delete</option>
+						<option value="10" id="eventrig_rolecreate">Role Create</option>
+						<option value="11" id="eventrig_roledelete">Role Delete</option>
+						<option value="12" id="eventrig_membanned">Member Banned</option>
+						<option value="13" id="eventrig_memunban">Member Unbanned</option>
+						<option value="14" id="eventrig_voicechannelcreate">Voice Channel Create</option>
+						<option value="15" id="eventrig_voicechanneldelete">Voice Channel Delete</option>
+						<option value="16" id="eventrig_emojicreate">Emoji Create</option>
+						<option value="17" id="eventrig_emojidelete">Emoji Delete</option>
+						<option value="18" id="eventrig_msgdeleted">Message Deleted</option>
+						<option value="19" id="eventrig_serverupdate">Server Update</option>
+						<option value="20" id="eventrig_memupdate">Member Update</option>
+						<option value="21" id="eventrig_presenceupdate">Presence Update</option>
+						<option value="22" id="eventrig_memvoiceupdate">Member Voice Update</option>
+						<option value="23" id="eventrig_channelupdate">Channel Update</option>
+						<option value="24" id="eventrig_channelpinsupdate">Channel Pins Update</option>
+						<option value="25" id="eventrig_roleupdate">Role Update</option>
+						<option value="26" id="eventrig_msgupdate">Message Update</option>
+						<option value="27" id="eventrig_emojiupdate">Emoji Update</option>
+						<option value="28" id="eventrig_msgreactadded">Message Reaction Added</option>
+						<option value="29" id="eventrig_msgreactremove">Message Reaction Removed</option>
+						<option value="30" id="eventrig_allmsgreacts"
+						>All Message Reactions Removed</option>
+						<option value="31" id="eventrig_membecomesava">Member Becomes Available</option>
+						<option value="32" id="eventrig_memchunkreceived">Member Chunck Received</option>
+						<option value="33" id="eventrig_memspeak">Member Starts/Stops Speaks</option>
+						<option value="34" id="eventrig_usertypestart">User Typing Starts</option>
+						<option value="35" id="eventrig_usertypestop">User Typing Stops</option>
+						<option value="36" id="eventrig_serverbecomesunava">Server Becomes Unavailable</option>
+						<option value="37" id="eventrig_onboterror">On Bot Error</option>
+						<option value="38" id="eventrig_ontimerestrict">On Time Restricted Command</option>
+						<!--<option value="39">On Awaited Response</option>
+						<option value="40">On Awaited Response Timeout</option>
+						<option value="41">On Awaited Reaction</option>
+						<option value="42">On Awaited Reaction Timeout</option>-->
+					</select>
+					<br>
+					<div id="tempVarStore">
+						<span id="tempLabel"></span>
+						<input id="etemp" style="width: 100%;" onchange="DBM.etempSaveData('etemp')" type="text">
+					</div>
+					<br>
+					<div id="tempVarStore2" style="position: absolute; width: calc(100% - 290px);">
+						<span id="tempLabel2"></span>
+						<input id="etemp2" style="width: 100%;" onchange="DBM.etempSaveData('etemp2')" type="text">
+					</div>
+					<div class="footer">
+						<div class="einfooter">
+							<div style="float: right; padding-bottom: 5px;">
+								<button class="tiny compact ui labeled icon button" onclick="DBM.eaddAction()"><i class="plus icon"></i><span id="eve_create">Create</span></button>
+								<button class="tiny compact ui labeled icon button" onclick="DBM.eeditAction()"><i class="legal icon"></i><span id="eve_edit">Edit</span></button>
+								<button class="tiny compact ui labeled icon button" onclick="DBM.edeleteAction()"><i class="remove icon"></i><span id="eve_delete">Delete</span></button>
+							</div>
+							<span id="eve_actions">Actions:</span>
+							<div class="emyactions" id="event-actions" style="width: 100%;">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="Settings" class="page" style="padding-top: 20px;">
+			
+				<div style="float:left; padding-left: 20px;"><button class="tiny compact ui icon button" onclick="DBM.toggleHidden(this, 'settings-token')" style="width: 50px;" id="showbutton">Show</button></div>
+				<br><br>
+				<div style="padding-top: 6px;"><span id="clientid">Client ID:</span></div>
+				<input class="settings" style="width: 85%;" type="text" id="settings-client" onchange="DBM.onSettingsChange('client')" onkeyup="DBM.onSettingsChange('client')" maxlength="18"><br>
+				<p id="bot-links">
+				</p>
+			</div>
+		</div>
+		<div id="No_Project" >
+			<div style="text-align: center; padding-top: 5%;">
+				<font size="4">
+					<div id="steamName">
+						<span id="hellosteam">Status : CONNECTED</span><br>
+						<span id="welcomesteam">PID : 4410 (cmd.exe)</span>
+					</div>
+				</font>
+				<br>
+				<font size="5"><span id="noprojectopen">Views</span></font><br>
+				<br>
+				<p>Number : <input type="aaaaaaaaaaa" name="views number"></p>
+				<br><br>
+				<button class="ui labeled icon button" onclick="DBM.createNewProject()">
+					<span id="createnewbotproject">Send Views</span>
+				</button>
+				<button class="ui right labeled icon button" onclick="DBM.openProject()">
+					<span id="openexistingbotproject">Live Counter</span>
+				</button>
+			<div>
+		</div>
+		<div id="saveAndQuit" class="ui basic modal" style="background-color: #36393e; border: 2px solid black;">
+			<div class="ui icon header" style="border: none;">
+				<i class="save icon"></i>
+				<span id="savebeforeclosing">Would you like to save before closing?</span>
+			</div>
+			<div style="text-align: center; padding-bottom: 5%;">
+				<button class="tiny compact ui labeled icon button" onclick="DBM.saveAndClose()">
+					<i class="checkmark icon"></i>
+					<span id="savebutton">Save</span>
+				</button>
+				<button class="tiny compact ui labeled icon button" style="margin-left: 20px;" onclick="DBM.noSaveAndClose()">
+					<i class="remove icon"></i>
+					<span id="dontsavebutton">Don't Save</span>
+				</button>
+				<button class="tiny compact ui labeled icon button" style="margin-left: 20px;" onclick="DBM.cancelModal()">
+					<i class="minus icon"></i>
+					<span id="cancelbutton">Cancel</span>
+				</button>
+			</div>
+		</div>
+		<div id="aliases" class="ui small modal">
+					<tbody id="tbody">
+					</tbody>
+				</table>
+			</div>
+			<div>
+				<div style="width: 85%; margin-left: 45px; margin-top: 15px;" class="ui icon input">
+					<input style="height: 38px;" id="alias-input" type="text" placeholder="Add alias..." onkeydown="DBM.preventSpace(event)">
+					<i class="inverted circular plus link icon" onclick="DBM.addAlias()"></i>
+				</div>
+			</div>
+		</div>
+		<div id="cooldown" class="ui small modal" style="height: 180px; border-radius: 10px; background-color: #36393e; border: 2px solid black;">
+			<h5 style="text-align: center;" class="ui header"><span id="text-cooldown">Command Aliases</span></h5>
+			<div style="margin: 20px 20px 20px 20px">
+				<div style="float: left; width: 45%;">
+					<span id="amountoftime">Amount of Time:</span><br>
+					<input class="round" style="height: 38px; margin-top: 5px;" id="cooldown-input" onkeyup="DBM.cooldownTypeUpdate()" type="text">
+				</div>
+				<div style="float: right; width: 45%;">
+					<span id="timemeasurement">Time Measurement:</span><br>
+					<div style="margin-top: 5px;">
+						<select class="ui fluid dropdown" id="select-cooldown" style="width: 100%;" onchange="DBM.cooldownTypeUpdate()">
+							<option value="0" id="norestriction">No Restriction</option>
+							<option value="1" id="seconds">Seconds</option>
+							<option value="2" id="minutes">Minutes</option>
+							<option value="3" id="hours">Hours</option>
+							<option value="4" id="days">Days</option>
+						</select>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="moduleManager" class="ui modal">
+			<h5 style="text-align: center;" class="ui header"><span id="nodejsmodules">NodeJS Modules</span></h5>
+			<div class="modalChild" style="width: 644px;">
+				<table id="mm-table" class="ui fixed single line celled table">
+					<tbody id="mm-tbody">
+					</tbody>
+				</table>
+			</div>
+			<div>
+				<div style="width: 85%; margin-left: 45px; margin-top: 15px;" class="ui icon input">
+					<input style="height: 38px;" id="mm-input" type="text" placeholder="Add module..." onkeydown="DBM.preventSpace(event)">
+					<i class="inverted circular plus link icon" onclick="DBM.addModule()"></i>
+				</div>
+			</div>
+		</div>
+		<link rel="stylesheet" type="text/css" id="maintheme" href="themes/Default/main.css">
+		<script>
+			if(typeof module === 'object') {
+				window.module = module;
+				module = undefined;
+			}
+		</script>
+		<script type="text/javascript" src="jquery/jquery.min.js"></script>
+		<script type="text/javascript" src="jquery/jquery.blockUI.js"></script>
+		<script src="semantic/dist/semantic.min.js"></script>
+
+	</body>
+</html>

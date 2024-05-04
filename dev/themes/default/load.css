@@ -1,0 +1,42 @@
+body {
+	background-color: #36393e;
+	color: #ccc;
+	font-size: 13px;
+}
+
+img {
+	position: absolute;
+}
+
+@keyframes rotation {
+	from {}
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+@keyframes scaling {
+	0%   {
+		transform: scale(1, 1);
+	}
+	50%  {
+		transform: scale(1.05, 1.05);
+	}
+	100% {
+		transform: scale(1, 1);
+	}
+}
+
+#backImage {
+	animation-name: rotation;
+	animation-duration: 5s;
+	animation-timing-function: linear;
+	animation-iteration-count: infinite;
+}
+
+#frontImage {
+	animation-name: scaling;
+	animation-duration: 1s;
+	animation-timing-function: linear;
+	animation-iteration-count: infinite;
+}
