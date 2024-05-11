@@ -10,3 +10,5 @@ Faster than Zefoy 🔥 Botting using requests ( GUI or CLI )
 # Errors
 Error 793 : The account of the video that you wanna bot must be subscribed to @Efekktus on TikTok.
 { [FATAL] : (bitcord.in) or (apitiktok.com) has disallowed your connection. the server has responded with an "793" Error. (Please try later) }
+# Discord
+https://discord.gg/bVHn2ybqPz
